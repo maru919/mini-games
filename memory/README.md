@@ -1,73 +1,41 @@
-# React + TypeScript + Vite
+# 神経衰弱
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+ローカル起動前提の2人対戦神経衰弱ゲームです。
 
-Currently, two official plugins are available:
+## 起動方法
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+cd memory
+npm install   # 初回のみ
+npm run dev   # http://localhost:5173 で起動
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## ゲームルール
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- **2人対戦**（同じPCでホットシート形式）
+- カードを2枚めくり、同じ絵柄なら獲得してそのまま**連続手番**
+- 外したら相手に**手番交代**
+- 全ペアを取り切ったとき、獲得ペアが多いプレイヤーの勝ち（同数は引き分け）
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 難易度
+
+| 難易度 | グリッド | ユニーク絵柄数 | 総カード枚数 |
+|--------|----------|---------------|-------------|
+| かんたん | 4 × 4 | 4種 | 16枚 |
+| ふつう | 6 × 6 | 9種 | 36枚 |
+| むずかしい | 8 × 8 | 16種 | 64枚 |
+
+各絵柄は **4枚ずつ**（トランプと同じ構成）。
+
+## カードセット
+
+ゲーム開始前に難易度とあわせてカードセットを選択できます。
+
+### 絵文字
+動物・食べ物などの絵文字をランダムに選出。ゲームごとに異なる組み合わせが登場します。
+
+### 単色
+HSL色空間で色相を等間隔（360 ÷ N 度）に配置した単色カード。難易度が上がるほど色の数が増え、近似色を見分ける力が試されます。
+
+### EBiDAN
+スターダストプロモーションのアイドルグループ集団 [EBiDAN](https://ebidan.jp) のメンバープロフィール写真カード。60名のプールからランダムに難易度に応じた人数を選出します。カードには写真とともに英名が表示されます。マッチしたカードはプレイヤーごとに赤（P1）・青（P2）のボーダーで区別されます。
