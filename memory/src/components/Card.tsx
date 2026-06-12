@@ -12,7 +12,7 @@ export function Card({ card, cardSetId, onClick }: Props) {
   const className = `card${faceUp ? ' is-flipped' : ''}${card.isMatched ? ` is-matched${matchedClass}` : ''}`;
 
   const isColor = cardSetId === 'color';
-  const isPhoto = cardSetId === 'ebidan' || cardSetId === 'samuraiblue';
+  const isPhoto = cardSetId === 'ebidan' || cardSetId === 'samuraiblue' || cardSetId === 'kawaiilab';
 
   const frontClass = [
     'card-face card-front',

@@ -11,6 +11,7 @@ export const CARD_SETS: CardSet[] = [
   { id: 'color',        label: '単色' },
   { id: 'ebidan',       label: 'EBiDAN' },
   { id: 'samuraiblue',  label: 'SAMURAI BLUE' },
+  { id: 'kawaiilab',   label: 'kawaii lab' },
 ];
 
 export const EMOJI_POOL: string[] = [

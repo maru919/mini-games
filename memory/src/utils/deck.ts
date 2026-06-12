@@ -2,11 +2,13 @@ import type { CardData, CardSet, Difficulty } from '../types';
 import { EMOJI_POOL, generateColorPool } from '../constants';
 import { EBIDAN_POOL } from '../data/ebidan';
 import { SAMURAIBLUE_POOL } from '../data/samuraiblue';
+import { KAWAIILAB_POOL } from '../data/kawaiilab';
 import { shuffle } from './shuffle';
 
 const PHOTO_POOLS: Record<string, { name: string; imageUrl: string }[]> = {
   ebidan: EBIDAN_POOL,
   samuraiblue: SAMURAIBLUE_POOL,
+  kawaiilab: KAWAIILAB_POOL,
 };
 
 export function buildDeck(difficulty: Difficulty, cardSet: CardSet): CardData[] {

@@ -1,7 +1,7 @@
 export type PlayerId = 1 | 2;
 export type GamePhase = 'playing' | 'checking' | 'finished';
 export type DifficultyId = 'easy' | 'normal' | 'hard';
-export type CardSetId = 'emoji' | 'color' | 'ebidan' | 'samuraiblue';
+export type CardSetId = 'emoji' | 'color' | 'ebidan' | 'samuraiblue' | 'kawaiilab';
 
 export interface Difficulty {
   id: DifficultyId;
