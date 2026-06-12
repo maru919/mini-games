@@ -15,6 +15,7 @@ export interface CardData {
   emoji: string;
   isFlipped: boolean;
   isMatched: boolean;
+  matchedBy: PlayerId | null;
 }
 
 export interface Scores {

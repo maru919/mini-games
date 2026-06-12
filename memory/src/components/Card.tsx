@@ -7,10 +7,11 @@ interface Props {
 
 export function Card({ card, onClick }: Props) {
   const faceUp = card.isFlipped || card.isMatched;
+  const matchedClass = card.matchedBy ? ` matched-by-${card.matchedBy}` : '';
 
   return (
     <button
-      className={`card${faceUp ? ' is-flipped' : ''}${card.isMatched ? ' is-matched' : ''}`}
+      className={`card${faceUp ? ' is-flipped' : ''}${card.isMatched ? ` is-matched${matchedClass}` : ''}`}
       onClick={() => onClick(card.id)}
       disabled={card.isMatched}
       aria-label={faceUp ? card.emoji : '裏向きカード'}

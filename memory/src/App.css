@@ -181,10 +181,16 @@
   transform: rotateY(180deg);
 }
 
-.card.is-matched .card-front {
-  background: #1a3a1a;
-  border-color: #4a8a4a;
-  opacity: 0.7;
+.card.matched-by-1 .card-front {
+  background: #3a1a1a;
+  border-color: #cc4444;
+  opacity: 0.75;
+}
+
+.card.matched-by-2 .card-front {
+  background: #1a1a3a;
+  border-color: #4444cc;
+  opacity: 0.75;
 }
 
 /* ── Result Overlay ────────────────────────────────────────── */
