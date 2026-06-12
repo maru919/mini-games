@@ -1,7 +1,7 @@
 export type PlayerId = 1 | 2;
 export type GamePhase = 'playing' | 'checking' | 'finished';
 export type DifficultyId = 'easy' | 'normal' | 'hard';
-export type CardSetId = 'emoji' | 'color';
+export type CardSetId = 'emoji' | 'color' | 'ebidan';
 
 export interface Difficulty {
   id: DifficultyId;
@@ -19,6 +19,7 @@ export interface CardSet {
 export interface CardData {
   id: number;
   face: string;
+  faceName?: string;
   isFlipped: boolean;
   isMatched: boolean;
   matchedBy: PlayerId | null;
