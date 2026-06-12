@@ -7,9 +7,10 @@ export const DIFFICULTIES: Difficulty[] = [
 ];
 
 export const CARD_SETS: CardSet[] = [
-  { id: 'emoji',   label: '絵文字' },
-  { id: 'color',   label: '単色' },
-  { id: 'ebidan',  label: 'EBiDAN' },
+  { id: 'emoji',        label: '絵文字' },
+  { id: 'color',        label: '単色' },
+  { id: 'ebidan',       label: 'EBiDAN' },
+  { id: 'samuraiblue',  label: 'SAMURAI BLUE' },
 ];
 
 export const EMOJI_POOL: string[] = [

@@ -12,12 +12,12 @@ export function Card({ card, cardSetId, onClick }: Props) {
   const className = `card${faceUp ? ' is-flipped' : ''}${card.isMatched ? ` is-matched${matchedClass}` : ''}`;
 
   const isColor = cardSetId === 'color';
-  const isEbidan = cardSetId === 'ebidan';
+  const isPhoto = cardSetId === 'ebidan' || cardSetId === 'samuraiblue';
 
   const frontClass = [
     'card-face card-front',
     isColor ? 'card-color-face' : '',
-    isEbidan ? 'card-photo-face' : '',
+    isPhoto ? 'card-photo-face' : '',
   ].filter(Boolean).join(' ');
 
   const frontStyle = isColor ? { backgroundColor: card.face } : undefined;
@@ -32,7 +32,7 @@ export function Card({ card, cardSetId, onClick }: Props) {
       <div className="card-inner">
         <div className="card-face card-back">🎴</div>
         <div className={frontClass} style={frontStyle}>
-          {isEbidan ? (
+          {isPhoto ? (
             <>
               <img
                 src={card.face}
