@@ -1,14 +1,17 @@
 import { useState } from 'react';
 import './App.css';
-import type { Difficulty } from './types';
+import type { CardSet, Difficulty } from './types';
 import { DifficultySelect } from './components/DifficultySelect';
 import { Board } from './components/Board';
 import { ScoreBar } from './components/ScoreBar';
 import { ResultOverlay } from './components/ResultOverlay';
 import { useMemoryGame } from './hooks/useMemoryGame';
 
-function GameScreen({ difficulty, onQuit }: { difficulty: Difficulty; onQuit: () => void }) {
-  const { cards, phase, currentPlayer, scores, flipCard, restart } = useMemoryGame(difficulty);
+interface GameConfig { difficulty: Difficulty; cardSet: CardSet }
+
+function GameScreen({ config, onQuit }: { config: GameConfig; onQuit: () => void }) {
+  const { difficulty, cardSet } = config;
+  const { cards, phase, currentPlayer, scores, flipCard, restart } = useMemoryGame(difficulty, cardSet);
 
   return (
     <div className="game-screen">
@@ -18,7 +21,7 @@ function GameScreen({ difficulty, onQuit }: { difficulty: Difficulty; onQuit: ()
         onRestart={restart}
         onQuit={onQuit}
       />
-      <Board cards={cards} cols={difficulty.cols} onCardClick={flipCard} />
+      <Board cards={cards} cols={difficulty.cols} cardSetId={cardSet.id} onCardClick={flipCard} />
       {phase === 'finished' && (
         <ResultOverlay scores={scores} onRestart={restart} onQuit={onQuit} />
       )}
@@ -27,17 +30,21 @@ function GameScreen({ difficulty, onQuit }: { difficulty: Difficulty; onQuit: ()
 }
 
 export default function App() {
-  const [difficulty, setDifficulty] = useState<Difficulty | null>(null);
+  const [config, setConfig] = useState<GameConfig | null>(null);
 
-  if (!difficulty) {
-    return <DifficultySelect onSelect={setDifficulty} />;
+  if (!config) {
+    return (
+      <DifficultySelect
+        onSelect={(difficulty, cardSet) => setConfig({ difficulty, cardSet })}
+      />
+    );
   }
 
   return (
     <GameScreen
-      key={difficulty.id}
-      difficulty={difficulty}
-      onQuit={() => setDifficulty(null)}
+      key={`${config.difficulty.id}-${config.cardSet.id}`}
+      config={config}
+      onQuit={() => setConfig(null)}
     />
   );
 }

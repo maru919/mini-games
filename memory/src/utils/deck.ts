@@ -1,14 +1,19 @@
-import type { CardData, Difficulty } from '../types';
-import { EMOJI_POOL } from '../constants';
+import type { CardData, CardSet, Difficulty } from '../types';
+import { EMOJI_POOL, generateColorPool } from '../constants';
 import { shuffle } from './shuffle';
 
-export function buildDeck(difficulty: Difficulty): CardData[] {
+export function buildDeck(difficulty: Difficulty, cardSet: CardSet): CardData[] {
   const uniqueCount = difficulty.pairs / 2;
-  const emojis = shuffle(EMOJI_POOL).slice(0, uniqueCount);
-  const quads = [...emojis, ...emojis, ...emojis, ...emojis];
-  return shuffle(quads).map((emoji, index) => ({
+
+  const faces: string[] =
+    cardSet.id === 'color'
+      ? generateColorPool(uniqueCount)
+      : shuffle(EMOJI_POOL).slice(0, uniqueCount);
+
+  const quads = [...faces, ...faces, ...faces, ...faces];
+  return shuffle(quads).map((face, index) => ({
     id: index,
-    emoji,
+    face,
     isFlipped: false,
     isMatched: false,
     matchedBy: null,
