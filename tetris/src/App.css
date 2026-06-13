@@ -1,0 +1,256 @@
+/* ── Buttons ──────────────────────────────────────────────── */
+.btn {
+  background: #2a2a45;
+  color: #e8e8f0;
+  border: 1px solid #3a3a5c;
+}
+
+.btn--primary {
+  background: #5b4fcf;
+  border-color: #7b6fe8;
+  color: #fff;
+}
+
+.btn--ghost {
+  background: transparent;
+  border-color: #444;
+  color: #888;
+}
+
+.btn--sm {
+  padding: 5px 10px;
+  font-size: 0.78rem;
+}
+
+.btn--lg {
+  padding: 14px 40px;
+  font-size: 1.1rem;
+  border-radius: 8px;
+}
+
+/* ── Start Screen ─────────────────────────────────────────── */
+.start-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  padding: 48px 32px;
+}
+
+.game-title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: #c9b8ff;
+}
+
+.key-guide {
+  background: #161630;
+  border: 1px solid #2a2a45;
+  border-radius: 10px;
+  padding: 20px 32px;
+}
+
+.key-guide table {
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.key-guide td {
+  padding: 5px 12px;
+  color: #aaa;
+}
+
+.key-guide td:first-child {
+  font-family: monospace;
+  color: #c9b8ff;
+  font-weight: 700;
+  text-align: right;
+}
+
+/* ── Game Screen ──────────────────────────────────────────── */
+.game-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  width: 100%;
+  max-width: 480px;
+}
+
+.game-area {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+/* ── Status Bar ───────────────────────────────────────────── */
+.status-bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: #161630;
+  border: 1px solid #2a2a45;
+  border-radius: 10px;
+  padding: 10px 16px;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 52px;
+}
+
+.stat-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #666;
+  text-transform: uppercase;
+}
+
+.stat-value {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #e8e8f0;
+  line-height: 1.2;
+}
+
+.status-actions {
+  margin-left: auto;
+  display: flex;
+  gap: 6px;
+}
+
+/* ── Board ────────────────────────────────────────────────── */
+.tetris-board {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(var(--cols), 1fr);
+  grid-template-rows: repeat(var(--rows), 1fr);
+  width: 220px;
+  height: 440px;
+  border: 2px solid #2a2a45;
+  border-radius: 4px;
+  background: #0a0a18;
+  gap: 1px;
+  padding: 1px;
+}
+
+.board-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 10, 24, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #c9b8ff;
+  z-index: 10;
+  border-radius: 2px;
+}
+
+/* ── Cell ─────────────────────────────────────────────────── */
+.cell {
+  background: #111126;
+  border-radius: 1px;
+}
+
+.cell--filled {
+  background: var(--cell-color, #5b4fcf);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.25), inset 0 -1px 0 rgba(0,0,0,0.3);
+}
+
+/* ── Next Piece ───────────────────────────────────────────── */
+.next-piece {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.next-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #666;
+  text-transform: uppercase;
+}
+
+.next-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  width: 64px;
+  height: 64px;
+  gap: 1px;
+  padding: 1px;
+  background: #161630;
+  border: 1px solid #2a2a45;
+  border-radius: 4px;
+}
+
+.next-cell {
+  background: #0a0a18;
+  border-radius: 1px;
+}
+
+.next-cell--filled {
+  background: var(--cell-color, #5b4fcf);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.25), inset 0 -1px 0 rgba(0,0,0,0.3);
+}
+
+/* ── Result Overlay ───────────────────────────────────────── */
+.result-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.result-card {
+  background: #161630;
+  border: 1px solid #2a2a45;
+  border-radius: 16px;
+  padding: 36px 44px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  min-width: 280px;
+}
+
+.result-title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #f44336;
+}
+
+.result-stats {
+  display: flex;
+  gap: 24px;
+}
+
+.result-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.result-score {
+  font-size: 1.5rem;
+  color: #c9b8ff;
+}
+
+.result-actions {
+  display: flex;
+  gap: 12px;
+}
