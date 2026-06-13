@@ -22,7 +22,12 @@ export function getCells(piece: ActivePiece): [number, number][] {
   return shape.map(([dr, dc]) => [piece.row + dr, piece.col + dc]);
 }
 
+function topPadding(type: TetrominoType, rotation: Rotation): number {
+  return Math.min(...TETROMINOES[type][rotation].map(([r]) => r));
+}
+
 export function rotatePiece(piece: ActivePiece, dir: 1 | -1): ActivePiece {
   const next = ((piece.rotation + dir + 4) % 4) as Rotation;
-  return { ...piece, rotation: next };
+  const rowAdjust = topPadding(piece.type, piece.rotation) - topPadding(piece.type, next);
+  return { ...piece, rotation: next, row: piece.row + rowAdjust };
 }
