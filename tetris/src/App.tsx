@@ -1,6 +1,3 @@
-// アプリのルートコンポーネント。
-// StartScreen ⇄ GameScreen の切り替えのみを担う。
-
 import { useState } from 'react';
 import './App.css';
 import { useTetris } from './hooks/useTetris';
@@ -15,8 +12,6 @@ function GameScreen({ onQuit }: { onQuit: () => void }) {
   const { state, dispatch } = useTetris();
   useKeyboard(dispatch);
 
-  // queue[0] が次のピース。キューが空になることは設計上ないが、
-  // フォールバックとして 'I' を指定している。
   const nextType = state.queue[0] ?? 'I';
 
   return (
@@ -46,8 +41,6 @@ function GameScreen({ onQuit }: { onQuit: () => void }) {
 
 export default function App() {
   const [playing, setPlaying] = useState(false);
-  // key を変えることで GameScreen を強制再マウントし、
-  // useTetris の状態（スコア・盤面など）をリセットする。
   const [key, setKey] = useState(0);
 
   if (!playing) {
