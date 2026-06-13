@@ -1,3 +1,7 @@
+// キーボードイベントをゲームアクションに変換するフック。
+// dispatch を受け取って window に登録するだけなので、
+// ゲームロジック（useTetris）から入力処理を切り離せる。
+
 import { useEffect } from 'react';
 import type { Dispatch } from 'react';
 
@@ -10,6 +14,8 @@ type Action =
   | { type: 'TOGGLE_PAUSE' }
   | { type: 'RESTART' };
 
+// e.code はレイアウト非依存のキー識別子（QWERTY/AZERTY 問わず同じ値）。
+// e.key と異なり、日本語 IME や修飾キーの影響を受けにくい。
 const KEY_MAP: Record<string, () => Action | null> = {
   ArrowLeft:  () => ({ type: 'MOVE', dx: -1 }),
   ArrowRight: () => ({ type: 'MOVE', dx: 1 }),
@@ -22,6 +28,8 @@ const KEY_MAP: Record<string, () => Action | null> = {
   KeyP:       () => ({ type: 'TOGGLE_PAUSE' }),
 };
 
+// 矢印キーとスペースはブラウザのデフォルト動作（ページスクロール）を
+// 抑止しないとゲーム操作が画面スクロールに奪われてしまう。
 const PREVENT_KEYS = new Set(['ArrowLeft', 'ArrowRight', 'ArrowDown', 'ArrowUp', 'Space']);
 
 export function useKeyboard(dispatch: Dispatch<Action>) {

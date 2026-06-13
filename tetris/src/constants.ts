@@ -2,8 +2,12 @@ import type { TetrominoType } from './types';
 
 export const BOARD_COLS = 10;
 export const BOARD_ROWS = 20;
+// スポーン位置は行 0（盤面の最上段）。
+// バウンディングボックスの上に 1〜2 行の余白があるミノは
+// 視覚的に盤面外から降ってくるように見える。
 export const SPAWN_ROW = 0;
 
+// テトリスガイドライン準拠の配色
 export const TETROMINO_COLORS: Record<TetrominoType, string> = {
   I: '#00bcd4',
   O: '#ffeb3b',
@@ -14,8 +18,10 @@ export const TETROMINO_COLORS: Record<TetrominoType, string> = {
   L: '#ff9800',
 };
 
-// Each tetromino defined as 4 rotations, each rotation is an array of [row, col] offsets
-// relative to the top-left of the bounding box
+// 各ミノの形状を 4 回転 × 4 セルの [row, col] オフセット配列で定義。
+// 座標系は 4×4 バウンディングボックスの左上を原点とする。
+// I ミノは 4×4 全体、その他は 3×3 に収まるよう設計した。
+// 回転インデックス: 0=0°, 1=90°(右), 2=180°, 3=270°(左)
 export const TETROMINOES: Record<TetrominoType, [number, number][][]> = {
   I: [
     [[1,0],[1,1],[1,2],[1,3]],
@@ -61,13 +67,17 @@ export const TETROMINOES: Record<TetrominoType, [number, number][][]> = {
   ],
 };
 
-// Score for clearing N lines at once
+// N ライン同時消しのスコア。4 ライン（テトリス）は 3 ラインの 1.6 倍で
+// 一度に多く消すほどボーナスが高くなる設計。
+// 実際のスコアはさらに (level + 1) 倍される。
 export const LINE_SCORE = [0, 100, 300, 500, 800];
 
-// Fall interval in ms per level (level 0..14+)
+// レベルごとの落下間隔 (ms)。NES テトリスの速度テーブルを参考に設定。
+// レベル 10 以降は 83ms に張り付き、14 から 50ms で上限。
 export const LEVEL_SPEEDS: number[] = [
   800, 717, 633, 550, 467, 383, 300, 217, 133, 100,
   83, 83, 83, 67, 50,
 ];
 
+// 何ライン消去でレベルアップするか
 export const LINES_PER_LEVEL = 10;
